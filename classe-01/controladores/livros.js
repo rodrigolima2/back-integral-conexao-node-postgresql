@@ -82,9 +82,14 @@ const excluirLivro = async (req, res) => {
 
     try {
         const livro = await conexao.query('select * from livros where id = $1', [id]);
+        const emprestimos = await conexao.query('select * from emprestimos where livro_id = $1', [id]);
 
         if (livro.rowCount === 0) {
             return res.status(404).json('Livro não encontrado.');
+        }
+
+        if (emprestimos.rowCount > 0) {
+            return res.status(400).json('Existem emprestimos atrelados ao id do livro.')
         }
 
         const query = 'delete from livros where id = $1';

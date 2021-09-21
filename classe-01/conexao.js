@@ -4,7 +4,7 @@ const pool = new Pool({
     user: 'postgres',
     host: 'localhost',
     database: 'biblioteca',
-    password: 'postgres',
+    password: 'asd',
     port: 5432
 });
 
@@ -15,4 +15,3 @@ const query = (text, param) => {
 module.exports = {
     query
 }
-
